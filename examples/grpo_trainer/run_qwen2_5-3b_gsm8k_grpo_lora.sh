@@ -1,4 +1,6 @@
 set -x
+export PYTHONPATH="$(pwd):${PYTHONPATH}"
+export PYTHONSAFEPATH=1
 
 python3 -m verl.trainer.main_ppo \
     algorithm.adv_estimator=grpo \
@@ -43,8 +45,8 @@ python3 -m verl.trainer.main_ppo \
     trainer.nnodes=1 \
     trainer.save_freq=20 \
     trainer.test_freq=5 \
+    trainer.default_local_dir=/ephemeral/checkpoints/verl_grpo_example_gsm8k/qwen2.5_3b_grpo_lora_muon_backward \
     trainer.total_epochs=15 $@
-
     # actor_rollout_ref.actor.ppo_mini_batch_size=256 \
     # data.train_batch_size=1024 \
     # trainer.n_gpus_per_node=8 \
